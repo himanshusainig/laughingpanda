@@ -7,8 +7,16 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     .carousel-slide {
-      object-fit: cover;
-      height: 400px;
+      max-height: 400px;
+      width: auto;
+      margin: 0 auto;
+      display: block;
+    }
+    .carousel-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: auto;
     }
   </style>
   <script defer>
@@ -23,7 +31,7 @@
           const img = document.createElement('img');
           img.src = `images/image${i}.${ext}`;
           img.alt = `Chardham ${i}`;
-          img.className = 'carousel-slide hidden w-full';
+          img.className = 'carousel-slide hidden';
           img.onerror = function () { this.remove(); };
           container.appendChild(img);
         }
