@@ -26,33 +26,35 @@
       background: none !important;
     }
 
-    .carousel-slide {
-      max-height: 400px;
-      max-width: 100%;
-      height: auto;
-      width: auto;
-      object-fit: contain;
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 96rem;
+      height: 400px;
       margin: 0 auto;
-      display: none;
+      overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: all 0.6s ease-in-out;
     }
 
     .carousel-slide.active {
-      display: block;
-    }
-
-    .carousel-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 400px;
-      overflow: hidden;
-      background-color: rgba(255,255,255,0.8);
+      left: 0;
+      opacity: 1;
     }
   </style>
   <script defer>
     let current = 0;
     let imageExtensions = ['jpeg', 'jpg'];
-    let totalSlides = 0;
     let loadedSlides = [];
 
     function loadSlides() {
@@ -68,9 +70,8 @@
               loadedSlides.push(img);
               if (loadedSlides.length === 1) img.classList.add('active');
               container.appendChild(img);
-              totalSlides = loadedSlides.length;
             }
-          }
+          };
           img.onerror = function () { this.remove(); };
         }
       });
@@ -79,20 +80,22 @@
     function showSlide(index) {
       loadedSlides.forEach((slide, i) => {
         slide.classList.remove('active');
-        if (i === index) slide.classList.add('active');
       });
+      if (loadedSlides[index]) {
+        loadedSlides[index].classList.add('active');
+      }
     }
 
     function nextSlide() {
-      if (totalSlides <= 1) return;
-      current = (current + 1) % totalSlides;
+      if (loadedSlides.length <= 1) return;
+      current = (current + 1) % loadedSlides.length;
       showSlide(current);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       loadSlides();
       setInterval(() => {
-        if (totalSlides > 1) nextSlide();
+        if (loadedSlides.length > 1) nextSlide();
       }, 3000);
     });
   </script>
@@ -118,7 +121,7 @@
     </section>
 
     <section class="mb-12">
-      <div class="carousel-container relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-md">
+      <div class="carousel-container">
         <!-- images inserted dynamically -->
       </div>
     </section>
