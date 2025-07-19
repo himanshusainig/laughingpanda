@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chardham Yatra | LaughingPanda Travels</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script defer>
+    let current = 0;
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.carousel-slide');
+      slides.forEach((slide, i) => {
+        slide.classList.add('hidden');
+        if (i === index) slide.classList.remove('hidden');
+      });
+    }
+    function nextSlide() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+    setInterval(nextSlide, 3000);
+    window.addEventListener('DOMContentLoaded', () => showSlide(0));
+  </script>
+</head>
+<body class="bg-gray-100 font-sans leading-relaxed tracking-wide">
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto py-6 px-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-indigo-700">LaughingPanda Travels</h1>
+      <nav>
+        <a href="#chardham" class="text-gray-700 hover:text-indigo-600 px-3">Chardham Yatra</a>
+        <a href="#contact" class="text-gray-700 hover:text-indigo-600 px-3">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto py-10 px-4">
+    <section class="mb-10">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-4">Welcome to LaughingPanda Travels</h2>
+      <p class="text-gray-700">Embark on a divine journey through the sacred Char Dham in Uttarakhand: Yamunotri, Gangotri, Kedarnath, and Badrinath. We offer spiritually enriching, comfortable, and all-inclusive pilgrimage packages.</p>
+    </section>
+
+    <section class="mb-12">
+      <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg shadow-md">
+        <div class="carousel-slide hidden">
+          <img src="images/image1.jpg" alt="Chardham 1" class="w-full">
+        </div>
+        <div class="carousel-slide hidden">
+          <img src="images/image2.jpg" alt="Chardham 2" class="w-full">
+        </div>
+        <div class="carousel-slide hidden">
+          <img src="images/image3.jpg" alt="Chardham 3" class="w-full">
+        </div>
+      </div>
+    </section>
+
+    <section id="chardham" class="mb-12">
+      <h3 class="text-2xl font-bold text-indigo-700 mb-6">Chardham Yatra Packages</h3>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded shadow">
+          <h4 class="text-xl font-bold text-gray-800">Standard Package</h4>
+          <p class="text-gray-600">10 days / 9 nights | Transport, Hotels, Meals included</p>
+          <p class="text-gray-800 mt-2">Price: ₹28,999 per person</p>
+        </div>
+
+        <div class="bg-white p-6 rounded shadow">
+          <h4 class="text-xl font-bold text-gray-800">Premium Package</h4>
+          <p class="text-gray-600">9 days / 8 nights | 3-star Hotels, Guide, VIP Darshan</p>
+          <p class="text-gray-800 mt-2">Price: ₹39,999 per person</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="mb-12">
+      <h3 class="text-2xl font-bold text-indigo-700 mb-4">Contact Us</h3>
+      <p class="text-gray-700 mb-2">Owner: Karan Saini</p>
+      <p class="text-gray-700 mb-2">Phone: +91 8218082626</p>
+      <p class="text-gray-700 mb-2">Email: info@laughingpandatravels.in</p>
+      <p class="text-gray-700 mb-4">WhatsApp: +91 8218082626</p>
+
+      <form class="bg-white p-6 rounded shadow-md" name="inquiry">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4">Send Us an Inquiry</h4>
+        <label class="block mb-2 text-sm font-medium text-gray-700">Name</label>
+        <input type="text" name="name" class="w-full mb-4 p-2 border rounded" required />
+
+        <label class="block mb-2 text-sm font-medium text-gray-700">Email</label>
+        <input type="email" name="email" class="w-full mb-4 p-2 border rounded" required />
+
+        <label class="block mb-2 text-sm font-medium text-gray-700">Message</label>
+        <textarea name="message" rows="4" class="w-full mb-4 p-2 border rounded" required></textarea>
+
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <a href="https://wa.me/918218082626" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg text-sm" target="_blank" rel="noopener noreferrer">
+    💬 Chat on WhatsApp
+  </a>
+
+  <footer class="bg-white mt-12 py-6 text-center text-gray-500 text-sm">
+    © 2025 LaughingPanda Travels. All rights reserved.
+  </footer>
+</body>
+</html>
