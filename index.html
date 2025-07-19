@@ -7,20 +7,27 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script defer>
     let current = 0;
+    let totalSlides = 0;
+
     function showSlide(index) {
       const slides = document.querySelectorAll('.carousel-slide');
+      totalSlides = slides.length;
       slides.forEach((slide, i) => {
         slide.classList.add('hidden');
         if (i === index) slide.classList.remove('hidden');
       });
     }
+
     function nextSlide() {
-      const slides = document.querySelectorAll('.carousel-slide');
-      current = (current + 1) % slides.length;
+      if (totalSlides <= 1) return;
+      current = (current + 1) % totalSlides;
       showSlide(current);
     }
-    setInterval(nextSlide, 3000);
-    window.addEventListener('DOMContentLoaded', () => showSlide(0));
+
+    window.addEventListener('DOMContentLoaded', () => {
+      showSlide(0);
+      setInterval(nextSlide, 3000);
+    });
   </script>
 </head>
 <body class="bg-gray-100 font-sans leading-relaxed tracking-wide">
