@@ -8,21 +8,30 @@
   <style>
     .carousel-slide {
       max-height: 400px;
+      max-width: 100%;
+      height: auto;
       width: auto;
+      object-fit: contain;
       margin: 0 auto;
+      display: none;
+    }
+    .carousel-slide.active {
       display: block;
     }
     .carousel-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: auto;
+      height: 400px;
+      overflow: hidden;
+      background-color: #f3f4f6;
     }
   </style>
   <script defer>
     let current = 0;
     let imageExtensions = ['jpeg', 'jpg'];
     let totalSlides = 0;
+    let loadedSlides = [];
 
     function loadSlides() {
       const container = document.querySelector('.carousel-container');
@@ -31,19 +40,24 @@
           const img = document.createElement('img');
           img.src = `images/image${i}.${ext}`;
           img.alt = `Chardham ${i}`;
-          img.className = 'carousel-slide hidden';
+          img.className = 'carousel-slide';
+          img.onload = function () {
+            if (!loadedSlides.includes(img)) {
+              loadedSlides.push(img);
+              if (loadedSlides.length === 1) img.classList.add('active');
+              container.appendChild(img);
+              totalSlides = loadedSlides.length;
+            }
+          }
           img.onerror = function () { this.remove(); };
-          container.appendChild(img);
         }
       });
     }
 
     function showSlide(index) {
-      const slides = document.querySelectorAll('.carousel-slide');
-      totalSlides = slides.length;
-      slides.forEach((slide, i) => {
-        slide.classList.add('hidden');
-        if (i === index) slide.classList.remove('hidden');
+      loadedSlides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) slide.classList.add('active');
       });
     }
 
@@ -55,10 +69,9 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       loadSlides();
-      setTimeout(() => {
-        showSlide(0);
-        setInterval(nextSlide, 3000);
-      }, 500);
+      setInterval(() => {
+        if (totalSlides > 1) nextSlide();
+      }, 3000);
     });
   </script>
 </head>
